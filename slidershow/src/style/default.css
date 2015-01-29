@@ -1,0 +1,9 @@
+.ss-wrapper {
+	transition:transform .4s ease;
+	-webkit-transition:transform .4s ease;
+	-webkit-transition:-webkit-transform .4s ease;
+	-moz-transition:-moz-transform .4s ease;
+	-o-transition:-o-transform .4s ease;
+	-ms-transition:-ms-transform .4s ease;
+}
+.ss-wrapper .ss-item img{width: 100%;height: 100%;}

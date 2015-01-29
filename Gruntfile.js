@@ -15,7 +15,7 @@ module.exports = function(grunt) {
       options: {
         jshintrc: '.jshintrc'
       },
-      platform: {
+      global: {
         options: {
           predef: ['SliderShow']
         },
@@ -23,7 +23,7 @@ module.exports = function(grunt) {
           src: [
           'slidershow/src/script/cmd.js',
           'slidershow/src/script/amd.js',
-          'slidershow/src/script/platform.js'
+          'slidershow/src/script/global.js'
           ]
         }
       },
@@ -61,16 +61,13 @@ module.exports = function(grunt) {
         tasks: ['jshint:test', 'nodeunit']
       },
     },
-
-    /*模板工具*/
-    
-
+    /*js合并*/
     rig: {
       options: {
         //banner: "'use strict';\n"
       },
       platform: {
-        src: ['slidershow/src/script/platform.js'],
+        src: ['slidershow/src/script/global.js'],
         dest: 'dist/slidershow-'+version+'.js'
       },
       cmd: {
@@ -82,7 +79,6 @@ module.exports = function(grunt) {
         dest: 'dist/slidershow-amd-'+version+'.js'
       }
     },
-
     uglify: {
       target: {
         files: grunt.file.expandMapping(['dist/*.js'], 'dist/', {
@@ -92,6 +88,25 @@ module.exports = function(grunt) {
         })
       }
     },
+    /*样式*/
+    concat:{
+      dist: {
+        src: ['slidershow/src/style/**/*.css'],
+        dest: 'dist/slidershow-'+version+'.css',
+      }
+    },
+
+    cssmin:{
+       target: {
+        files: [{
+          expand: true,
+          cwd: 'dist',
+          src: ['*.css'],
+          dest: 'dist/min',
+          ext: '.min.css'
+        }]
+      }
+    },
 
     concurrent: {
     }
@@ -99,6 +114,6 @@ module.exports = function(grunt) {
   });
   
   
-    grunt.registerTask('default', ['jshint','rig','uglify', 'watch']);
+    grunt.registerTask('default', ['jshint','rig','uglify','concat','cssmin', 'watch']);
   
 };

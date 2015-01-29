@@ -7,14 +7,12 @@ var createJudgeFunc = function(vendor) {
             t,
             i = 0,
             l = v.length;
-
         for (; i < l; i++) {
             t = v[i] + vendor.words;
             if (t in dummyStyle) {
                 return v[i].substr(0, v[i].length - 1);
             }
         }
-
         return false;
     };
 };
@@ -67,15 +65,16 @@ var SliderShow = function(ul,option){
 	option.offset = option.offset || 30;
 	option.direction = option.direction || 'vertical';
 	option.slideTime = option.slideTime || 600;
+	option.viewHeight = option.viewHeight || document.documentElement.clientHeight;
+	option.viewWidth = option.viewWidth || document.documentElement.clientWidth;
 
 	ul = ul.nodeName ? ul : document.getElementById(ul);
 	var lis = ul.querySelectorAll('.slider-wrapper > .slider-item');
 	var index = 0,
-	clientHeight = document.documentElement.clientHeight,
-	clientWidth = document.documentElement.clientWidth,
+	clientHeight = option.viewHeight,
+	clientWidth = option.viewWidth,
 	length = lis.length;
 
-    ul.className = '';
     ul.style.height = clientHeight*length + 'px';
     ul.style.width = clientWidth + 'px';
 
@@ -83,7 +82,6 @@ var SliderShow = function(ul,option){
     for(var i=0;i<lis.length;i++){
         lis[i].style.height = clientHeight + 'px';
         lis[i].style.width = clientWidth + 'px';
-        lis[i].style.top = clientHeight*i + 'px';
     }
 
     lis[0].scrollIntoView();

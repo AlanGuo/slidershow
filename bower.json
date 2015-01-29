@@ -1,0 +1,30 @@
+{
+  "name": "slidershow",
+  "version": "0.0.0",
+  "description": "图片滚动组件，上下形式的图片轮播，主要用于宣传形式的手机，微信web页面",
+  "main": ["dist/slidershow-1.0.0.js","dist/slidershow-1.0.0.css"],
+  "moduleType": [
+    "amd",
+    "globals"
+  ],
+  "keywords": [
+    "slide",
+    "picture",
+    "image"
+  ],
+  "authors": [
+    "alan"
+  ],
+  "license": "MIT",
+  "homepage": "http://115.29.195.88/",
+  "private": false,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+  }
+}
