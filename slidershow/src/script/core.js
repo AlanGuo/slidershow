@@ -24,7 +24,6 @@ var prefixCSS = function(style,judgeFunc) {
     return vendor + style;
 };
 
-
 //开始动画
 var startAnimation = function(lis,index){
     if(lis[index]){
@@ -61,15 +60,21 @@ var transformCSS = prefixCSS('transform',transformJudgeFunc);
  * @param {Element|String} wrapper/id,元素对象或者元素id
  */
 var SliderShow = function(ul,option){
+	var self = this;
 	option = option || {};
 	option.offset = option.offset || 30;
 	option.direction = option.direction || 'vertical';
 	option.slideTime = option.slideTime || 600;
-	option.viewHeight = option.viewHeight || document.documentElement.clientHeight;
-	option.viewWidth = option.viewWidth || document.documentElement.clientWidth;
+	option.wrapper = option.wrapper || document.documentElement;
+	option.viewHeight = option.viewHeight || option.wrapper.clientHeight;
+	option.viewWidth = option.viewWidth || option.wrapper.clientWidth;
+	this.option = option;
+	this.switcher = true;
 
 	ul = ul.nodeName ? ul : document.getElementById(ul);
-	var lis = ul.querySelectorAll('.slider-wrapper > .slider-item');
+	this.ul = ul;
+
+	var lis = ul.querySelectorAll('.ss-wrapper > .ss-item');
 	var index = 0,
 	clientHeight = option.viewHeight,
 	clientWidth = option.viewWidth,
@@ -95,14 +100,19 @@ var SliderShow = function(ul,option){
 	};
 
 	ul.addEventListener('touchstart',function(evt){
-		isTouch = true;
+		if(self.switcher){
+			isTouch = true;
 
-		startPos = {
-	        x: evt.changedTouches[0].clientX,
-	        y: evt.changedTouches[0].clientY
-	    };
+			startPos = {
+		        x: evt.changedTouches[0].clientX,
+		        y: evt.changedTouches[0].clientY
+		    };
 
-	    evt.preventDefault();
+		    evt.preventDefault();
+		}
+		else{
+			isTouch = false;
+		}
 	});
 
 	ul.addEventListener('touchmove',function(evt){
@@ -148,4 +158,14 @@ var SliderShow = function(ul,option){
 	    }
 	    evt.preventDefault();
 	});
+};
+
+var slidershowProto = SliderShow.prototype;
+
+slidershowProto.stop = function(){
+	this.switcher = false;
+};
+
+slidershowProto.start = function(){
+	this.switcher = true;
 };

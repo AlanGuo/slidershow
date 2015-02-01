@@ -9,6 +9,9 @@
 		body,ul{margin: 0;padding: 0;}
 		ul li{list-style: none;padding: 0;margin: 0}
 	</style>
+	<!--bower:css-->
+	<link rel="stylesheet" type="text/css" href="../dist/slidershow-1.0.0.css">
+	<!--bower end-->
 </head>
 <body>
 	<ul id="slidershow-ul" class="ss-wrapper">
@@ -18,9 +21,12 @@
 		<li class="ss-item"><img src="image/04.jpg"></li>
 		<li class="ss-item"><img src="image/05.jpg"></li>
 	</ul>
-
+	<!--bower:js-->
+	<script type="text/javascript" src="../dist/slidershow-1.0.0.js"></script>
+	<!--bower end-->
 	<script type="text/javascript">
-		new SliderShow('slidershow-ul');
+		var slider = new SliderShow('slidershow-ul');
+		slider.stop();
 	</script>
 </body>
 </html>
