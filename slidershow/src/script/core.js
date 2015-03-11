@@ -120,7 +120,7 @@ var SliderShow = function(ul,option){
 	});
 
 	ul.addEventListener('touchend',function(evt){
-	    if(isTouch){
+	    if(self.switcher && isTouch){
 			isTouch = false;
 
 			//var disX = evt.changedTouches[0].clientX - startPos.x;
